@@ -1,0 +1,86 @@
+##for the purpose of this line, please run script in its installed directory
+$project_netbang=$pwd
+
+##creates a backup
+mkdir ~/netbang_backup
+
+##creates a netbang directory in ~/tmp
+mkdir ~/tmp/netbang
+
+##backs up tint2rc
+echo making backups
+sleep 1s
+cp ~/.config/tint2/default.tint2rc ~/netbang_backup
+
+##backs up openbox configs
+cp -rf ~/.config/openbox ~/netbang_backup/openbox
+
+##gets the ball rolling
+cd ~/tmp/netbang
+
+##resize tint2 to make it smaller
+echo resizing tint2
+sleep 1s
+panel_size=$(cat ~/.config/tint2/tint2rc | awk /panel_size/)
+sed "s/$panel_size/panel_size = 105% 24/" ~/.config/tint2/tint2rc > ~/.config/tint2/tint2rc
+
+##stops compositor from starting
+echo stopping compositor from starting at login
+sleep 1s
+sed -e "/cb-compositor --start && \\\/d" -e "/sleep 2s && \\\/d" ~/.config/openbox/autostart > ~/.config/openbox/autostart
+
+##stops clipboard manager from starting
+echo stopping clipboard manager from starting at login
+sleep 1s
+sed "s/(sleep 3s && clipit)/#(sleep 3s \&\&\ clipit)/" ~/.config/openbox/autostart > ~/.config/openbox/autostart
+
+##stops Thunar from starting
+echo stopping file manager from starting at login
+sleep 1s
+sed 's/thunar --daemon /#thunar --daemon /' ~/.config/openbox/autostart > ~/.config/openbox/autostart
+
+##enables palm detection, and stops fat palming the touchpad
+echo enabling palm detection, disabling fat palming
+sleep 1s
+echo >> ~/.config/openbox/autostart
+echo "##enables palm detection, disables fat palming" >> ~/.config/openbox/autostart
+echo synclient PalmDetect=1 >> ~/.config/openbox/autostart
+echo synclient PalmMinWidth=4 >> ~/.config/openbox/autostart
+
+##disables touchpad while typing
+echo disabling touchpad while typing
+sleep 1s
+echo >> ~/.config/openbox/autostart 
+echo "##disable touchpad while typing" >> ~/.config/openbox/autostart
+echo syndaemon -d -i 1 >> ~/.config/openbox/autostart
+
+##stops xfce4-notifyd from activating without deleting it. no more popups
+echo would you like to disable screen-based notifications? y/n
+read choice
+while [[ $choice != "y" && $choice != "n" ]]; do
+    echo please provide a valid input
+    reach choice
+    done
+if [ $choice = 'y' ]; then
+    echo disabling screen-based notifications
+    sleep 1s
+    sudo mv /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service ~/netbang_backup
+fi
+
+##cleaner pipe menu
+echo would you like a simpler pipe menu? this will override any custom configs you have made! y/n
+read input
+while [[ $input != "y" && $input != "n" ]]; do
+    echo please provide a valid input
+    read input
+    done
+if [ $input == "y" ]; then
+    echo changing pipe menu
+    sleep 1s
+    cd $project_netbang
+    rm ~/.config/openbox/menu.xml
+    cp menu.xml ~/.config/openbox/menu.xml
+    
+##finishing stuff off
+sudo rm -rf ~/tmp/netbang
+echo installation complete. please log in and out for changes to take effect
