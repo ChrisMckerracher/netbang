@@ -100,7 +100,7 @@ else; then
 
 echo uninstalling
     
-#deleted editted files
+#deletes editted files
 rm ~/.config/openbox ~/.config/tint2/tint2rc
     
 #moves backuped up files to their original directory
@@ -108,7 +108,7 @@ mv ~/netbang_backup/openbox ~/.config/openbox/
 mv ~/netbang_backup/tint2rc ~/.config/tint2/    
 sudo mv ~/netbang_backup/org.xfce.xfce4-notifyd.Notifications.service ~/usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service
 
-#removed netbang backup
+#removes netbang backup
 rm -rf ~/netbang_backup
 
 ##finishing stuff off
