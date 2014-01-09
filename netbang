@@ -70,7 +70,7 @@ while [[ $choice != "y" && $choice != "n" ]]; do
     reach choice
     done
 if [ $choice = 'y' ]; then
-    echo disabling screen-based notifications
+    echo disabling on-screen notifications
     sleep 1s
     sudo mv /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service ~/netbang_backup
 fi
@@ -88,6 +88,7 @@ if [ $input == "y" ]; then
     cd $project_netbang
     rm ~/.config/openbox/menu.xml
     cp menu.xml ~/.config/openbox/menu.xml
+fi
     
 ##finishing stuff off
 sudo rm -rf ~/tmp/netbang
