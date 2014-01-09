@@ -1,22 +1,30 @@
 ##for the purpose of this line, please run script in its installed directory
 $project_netbang=$pwd
 
+#interface with user to determine workflow
+echo are you: 
+echo 1) installing 
+echo 2) uninstalling
+echo please choice 1/2
+read choice
+
+while [[ $choice != "1" && choice !="2" ]]; do
+    echo please provide a valid input
+    read choice
+    done
+
+if [ $choice = 1 ]; then
+
 ##creates a backup
 mkdir ~/netbang_backup
-
-##creates a netbang directory in ~/tmp
-mkdir ~/tmp/netbang
 
 ##backs up tint2rc
 echo making backups
 sleep 1s
-cp ~/.config/tint2/default.tint2rc ~/netbang_backup
+cp ~/.config/tint2/tint2rc ~/netbang_backup
 
 ##backs up openbox configs
 cp -rf ~/.config/openbox ~/netbang_backup/openbox
-
-##gets the ball rolling
-cd ~/tmp/netbang
 
 ##resize tint2 to make it smaller
 echo resizing tint2
@@ -83,4 +91,24 @@ if [ $input == "y" ]; then
     
 ##finishing stuff off
 sudo rm -rf ~/tmp/netbang
-echo installation complete. please log in and out for changes to take effect
+echo installation complete. please log and in for changes to take effect
+
+else; then
+
+echo uninstalling
+    
+#deleted editted files
+rm ~/.config/openbox ~/.config/tint2/tint2rc
+    
+#moves backuped up files to their original directory
+mv ~/netbang_backup/openbox ~/.config/openbox/
+mv ~/netbang_backup/tint2rc ~/.config/tint2/    
+sudo mv ~/netbang_backup/org.xfce.xfce4-notifyd.Notifications.service ~/usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service
+
+#removed netbang backup
+rm -rf ~/netbang_backup
+
+##finishing stuff off
+echo uninstall complete. please log out and in for changes to take effect
+
+fi
