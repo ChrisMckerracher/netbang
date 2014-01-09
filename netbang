@@ -63,8 +63,7 @@ echo "##disable touchpad while typing" >> ~/.config/openbox/autostart
 echo syndaemon -d -i 1 >> ~/.config/openbox/autostart
 
 ##stops xfce4-notifyd from activating without deleting it. no more popups
-echo would you like to disable screen-based notifications? y/n
-read choice
+read -p "would you like to disable on-screen notifications? (y/n): " choice
 while [[ $choice != "y" && $choice != "n" ]]; do
     echo please provide a valid input
     reach choice
@@ -77,8 +76,7 @@ if [ $choice = 'y' ]; then
 fi
 
 ##cleaner pipe menu
-echo would you like a simpler pipe menu? this will override any custom configs you have made! y/n
-read input
+read -p "would you like a simpler pipe menu? this will override any custom pipe menu configs (y/n): " input
 while [[ $input != "y" && $input != "n" ]]; do
     echo please provide a valid input
     read input
