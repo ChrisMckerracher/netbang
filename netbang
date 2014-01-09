@@ -5,7 +5,7 @@ $project_netbang=$pwd
 echo are you: 
 echo 1) installing 
 echo 2) uninstalling
-echo please choice 1/2
+echo please choose (1/2):
 read choice
 
 while [[ $choice != "1" && choice !="2" ]]; do
@@ -98,15 +98,18 @@ else; then
 
 echo uninstalling
     
-#deletes editted files
+##deletes editted files
 rm ~/.config/openbox ~/.config/tint2/tint2rc
     
-#moves backuped up files to their original directory
+##moves backuped up files to their original directory
 mv ~/netbang_backup/openbox ~/.config/openbox/
 mv ~/netbang_backup/tint2rc ~/.config/tint2/    
-sudo mv ~/netbang_backup/org.xfce.xfce4-notifyd.Notifications.service ~/usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service
 
-#removes netbang backup
+if [ ls /usr/share/dbus-1 | grep xfce4 = "org.xfce.xfce4-notifyd.Notifications.service" ]; then 
+    sudo mv ~/netbang_backup/org.xfce.xfce4-notifyd.Notifications.service /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service
+fi
+
+##removes netbang backup
 rm -rf ~/netbang_backup
 
 ##finishing stuff off
