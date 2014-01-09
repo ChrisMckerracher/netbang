@@ -69,6 +69,7 @@ while [[ $choice != "y" && $choice != "n" ]]; do
     echo please provide a valid input
     reach choice
     done
+
 if [ $choice = 'y' ]; then
     echo disabling on-screen notifications
     sleep 1s
@@ -82,6 +83,7 @@ while [[ $input != "y" && $input != "n" ]]; do
     echo please provide a valid input
     read input
     done
+
 if [ $input == "y" ]; then
     echo changing pipe menu
     sleep 1s
