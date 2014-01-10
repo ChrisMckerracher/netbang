@@ -105,7 +105,7 @@ rm ~/.config/openbox ~/.config/tint2/tint2rc
 mv ~/netbang_backup/openbox ~/.config/openbox/
 mv ~/netbang_backup/tint2rc ~/.config/tint2/    
 
-if [ ls /usr/share/dbus-1 | grep xfce4 = "org.xfce.xfce4-notifyd.Notifications.service" ]; then 
+if [ ls /usr/share/dbus-1 | grep xfce4-notifyd != "org.xfce.xfce4-notifyd.Notifications.service" ]; then 
     sudo mv ~/netbang_backup/org.xfce.xfce4-notifyd.Notifications.service /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service
 fi
 
