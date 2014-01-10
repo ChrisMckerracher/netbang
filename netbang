@@ -94,7 +94,7 @@ fi
     
 ##finishing stuff off
 sudo rm -rf ~/tmp/netbang
-echo installation complete. please log and in for changes to take effect
+echo installation complete. please log out and in for changes to take effect
 
 ;;
 
