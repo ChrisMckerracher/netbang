@@ -1,19 +1,20 @@
-##for the purpose of this line, please run script in its installed directory
-$project_netbang=$pwd
-
 #interface with user to determine workflow
 echo are you: 
 echo 1) installing 
 echo 2) uninstalling
 echo please choose (1/2):
-read choice
+read decision
 
-while [[ $choice != "1" && choice !="2" ]]; do
+while [[ $choice != "1" && choice != "2" ]]; do
     echo please provide a valid input
     read choice
     done
 
-if [ $choice = 1 ]; then
+case $decision in
+
+#if option 1, install, is chosen
+
+1)
 
 ##creates a backup
 mkdir ~/netbang_backup
@@ -64,6 +65,7 @@ echo syndaemon -d -i 1 >> ~/.config/openbox/autostart
 
 ##stops xfce4-notifyd from activating without deleting it. no more popups
 read -p "would you like to disable on-screen notifications? (y/n): " choice
+
 while [[ $choice != "y" && $choice != "n" ]]; do
     echo please provide a valid input
     reach choice
@@ -77,6 +79,7 @@ fi
 
 ##cleaner pipe menu
 read -p "would you like a simpler pipe menu? this will override any custom pipe menu configs (y/n): " input
+
 while [[ $input != "y" && $input != "n" ]]; do
     echo please provide a valid input
     read input
@@ -85,7 +88,6 @@ while [[ $input != "y" && $input != "n" ]]; do
 if [ $input == "y" ]; then
     echo changing pipe menu
     sleep 1s
-    cd $project_netbang
     rm ~/.config/openbox/menu.xml
     cp menu.xml ~/.config/openbox/menu.xml
 fi
@@ -94,7 +96,11 @@ fi
 sudo rm -rf ~/tmp/netbang
 echo installation complete. please log and in for changes to take effect
 
-else; then
+;;
+
+##if option 2, uninstall, is chosen
+
+2)
 
 echo uninstalling
     
@@ -115,4 +121,4 @@ rm -rf ~/netbang_backup
 ##finishing stuff off
 echo uninstall complete. please log out and in for changes to take effect
 
-fi
+esac
