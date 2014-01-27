@@ -14,7 +14,7 @@ case $decision in
 
 #if option 1, install, is chosen
 
-1)
+#1)
 
 ##creates a backup
 mkdir ~/netbang_backup
@@ -100,7 +100,7 @@ echo installation complete. please log out and in for changes to take effect
 
 ##if option 2, uninstall, is chosen
 
-2)
+#2)
 
 echo uninstalling
     
