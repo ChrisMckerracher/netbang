@@ -1,20 +1,20 @@
 #interface with user to determine workflow
 echo are you: 
-echo 1) installing 
-echo 2) uninstalling
-echo please choose (1/2):
+echo '1) installing' 
+echo '2) uninstalling'
+echo 'please choose (1/2)':
 read decision
 
-while [[ $choice != "1" && choice != "2" ]]; do
+while [[ $decision != '1' && choice != '2' ]]; do
     echo please provide a valid input
     read choice
     done
 
-case $decision in
+case $decision in 
 
 #if option 1, install, is chosen
 
-#1)
+1)
 
 ##creates a backup
 mkdir ~/netbang_backup
@@ -31,22 +31,22 @@ cp -rf ~/.config/openbox ~/netbang_backup/openbox
 echo resizing tint2
 sleep 1s
 panel_size=$(cat ~/.config/tint2/tint2rc | awk /panel_size/)
-sed "s/$panel_size/panel_size = 105% 24/" ~/.config/tint2/tint2rc > ~/.config/tint2/tint2rc
+sed -i "s/$panel_size/panel_size = 105% 24/" ~/.config/tint2/tint2rc 
 
 ##stops compositor from starting
 echo stopping compositor from starting at login
 sleep 1s
-sed -e "/cb-compositor --start && \\\/d" -e "/sleep 2s && \\\/d" ~/.config/openbox/autostart > ~/.config/openbox/autostart
+sed -i -e  "/cb-compositor --start && \\\/d" -i -e "/sleep 2s && \\\/d" ~/.config/openbox/autostart
 
 ##stops clipboard manager from starting
 echo stopping clipboard manager from starting at login
 sleep 1s
-sed "s/(sleep 3s && clipit)/#(sleep 3s \&\&\ clipit)/" ~/.config/openbox/autostart > ~/.config/openbox/autostart
+sed -i "s/(sleep 3s && clipit)/#(sleep 3s \&\&\ clipit)/" ~/.config/openbox/autostart
 
 ##stops Thunar from starting
 echo stopping file manager from starting at login
 sleep 1s
-sed 's/thunar --daemon /#thunar --daemon /' ~/.config/openbox/autostart > ~/.config/openbox/autostart
+sed -i 's/thunar --daemon /#thunar --daemon /' ~/.config/openbox/autostart
 
 ##enables palm detection, and stops fat palming the touchpad
 echo enabling palm detection, disabling fat palming
@@ -93,14 +93,14 @@ if [ $input == "y" ]; then
 fi
     
 ##finishing stuff off
-sudo rm -rf ~/tmp/netbang
+rm -rf ~/tmp/netbang
 echo installation complete. please log out and in for changes to take effect
 
 ;;
 
 ##if option 2, uninstall, is chosen
 
-#2)
+2)
 
 echo uninstalling
     
