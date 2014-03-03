@@ -121,4 +121,6 @@ rm -rf ~/netbang_backup
 ##finishing stuff off
 echo uninstall complete. please log out and in for changes to take effect
 
+;;
+
 esac
