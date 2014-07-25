@@ -5,9 +5,9 @@ echo '2) uninstalling'
 echo 'please choose (1/2)':
 read decision
 
-while [[ $decision != '1' && choice != '2' ]]; do
+while [[ $decision != '1' && decision != '2' ]]; do
     echo please provide a valid input
-    read choice
+    read decision
     done
 
 case $decision in 
